@@ -2,7 +2,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebas
 import {
   getAuth,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAblJAXsiG8QO8F3cDumdhrbogd7lAE-fc",
   authDomain: "hello-world-hacks-de5c9.firebaseapp.com",
@@ -14,6 +21,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 const btn = document.getElementById("btn");
 
@@ -27,9 +35,14 @@ btn.addEventListener("click", (event) => {
       const user = userCredential.user;
       window.location.href = "profile.html";
     })
-    .then((userCredential) => {
-      alert("Successfully logged in");
-    })
+    // .then((userCredential) => {
+    //   alert("Successfully logged in");
+    // })
+    .then(
+      onAuthStateChanged(auth, (user) => {
+        console.log("user status changed", user);
+      })
+    )
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
