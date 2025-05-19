@@ -12,7 +12,7 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  background: url("./utils/SynthWave1.png") no-repeat center center/cover;
+  background: url("./utils/your-background.jpg") no-repeat center center/cover;
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
